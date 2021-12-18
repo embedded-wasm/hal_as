@@ -1,6 +1,6 @@
 # WASM Embedded AssemblyScript HAL
 
-An AssemblyScript HAL based on the embedded-wasm [spec](https://github.com/embedded-wasm/spec).
+An [AssemblyScript](https://www.assemblyscript.org/quick-start.html) HAL based on the embedded-wasm [spec](https://github.com/embedded-wasm/spec).
 
 ## Status
 
@@ -12,4 +12,10 @@ WIP, Extremely Alpha. Implemented interfaces should work, but, expect changes an
 ## Usage
 
 TODO
+
+## Layout
+
+- [assembly](assembly/) contains the hal sources
+- [tests](tests/) contains tests corresponding to those defined in the spec
+
 
