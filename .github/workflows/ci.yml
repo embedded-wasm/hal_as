@@ -10,6 +10,7 @@ jobs:
   hal_tests:
     name: Test ${{ matrix.test }}
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     strategy:
       matrix:
@@ -24,7 +25,7 @@ jobs:
     - name: Install node
       uses: actions/setup-node@v2
       with:
-        node-version: 'stable'
+        node-version: '16'
         cache: 'npm'
         cache-dependency-path: subdir/package-lock.json
 
