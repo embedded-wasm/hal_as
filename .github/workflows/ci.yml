@@ -26,8 +26,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '16'
-        cache: 'npm'
-        cache-dependency-path: subdir/package-lock.json
+        cache-dependency-path: package-lock.json
 
     # TODO: make this work alongside PRs to the spec and RT.
     # probably move tests for a given spec version to the runtime to simplify this
