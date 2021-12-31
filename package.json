@@ -12,6 +12,9 @@
   },
   "license": "MPL-2.0",
   "author": "Ryan Kurte <ryan@kurte.nz>",
+  "engines": {
+          "node": ">=16.0.0"
+  },
   "version": "0.1.0",
   "dependencies": {
     "@assemblyscript/loader": "^0.19.22",
