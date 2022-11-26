@@ -39,25 +39,47 @@ export class Spi {
         if (err < 0) {
             throw new Error(`as.SPI.write error: ${err}`)
         }
+    }
 
+    /// Read data
+    public read(data: Uint8Array): void {
+        Console.log(`as.SPI.read data: ${data}`);
+
+        let err = spi_read(this.handle, new Bytes(data));
+        if (err < 0) {
+            throw new Error(`as.SPI.read error: ${err}`)
+        }
     }
 
     /// Transfer data (simultaneous write/read)
-    public transfer(data: Uint8Array): void {
-        Console.log(`as.SPI.read data: ${data}`);
+    public transfer_inplace(data: Uint8Array): void {
+        Console.log(`as.SPI.transfer data: ${data}`);
 
         let d = new Bytes(data);
 
-        let err = spi_transfer(this.handle, d);
+        let err = spi_transfer_inplace(this.handle, d);
         if (err < 0) {
-            throw new Error(`as.SPI.read error: ${err}`)
+            throw new Error(`as.SPI.transfer error: ${err}`)
+        }
+    }
+
+    /// Transfer data (simultaneous write/read)
+    public transfer(read: Uint8Array, write: Uint8Array): void {
+        Console.log(`as.SPI.transfer data: ${write}`);
+
+        let r = new Bytes(read);
+        let w = new Bytes(write);
+
+        let err = spi_transfer(this.handle, r, w);
+        if (err < 0) {
+            throw new Error(`as.SPI.transfer error: ${err}`)
         }
     }
 
     public deinit(): void {
         let err = spi_deinit(this.handle);
         if (err < 0) {
-            throw new Error(`as.SPI.read error: ${err}`)
+            throw new Error(`as.SPI.deinit error: ${err}`)
         }
         this.handle = -1;
     }
@@ -83,10 +105,23 @@ declare function spi_write(
     data: Bytes,
 ): i32;
 
+@external("spi", "read")
+declare function spi_read(
+    handle: u32,
+    data: Bytes,
+): i32;
+
+@external("spi", "transfer_inplace")
+declare function spi_transfer_inplace(
+    handle: u32,
+    buff: Bytes,
+): i32;
+
 @external("spi", "transfer")
 declare function spi_transfer(
     handle: u32,
-    buff: Bytes,
+    read: Bytes,
+    write: Bytes,
 ): i32;
 
 @external("spi", "deinit")
